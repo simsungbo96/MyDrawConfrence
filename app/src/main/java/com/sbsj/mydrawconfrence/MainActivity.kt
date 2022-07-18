@@ -13,6 +13,7 @@ import com.sbsj.mydrawconfrence.databinding.ActivityMainBinding
 //todo 1. 색변경시 paint 객체 생성 대신 그리고나서  paint 객체생성
 //todo 2. UserSelectTool 에 유저가 선택한 도구들을 저장하는 데이터 클래스 구현 필요
 //todo 3. 한번 그릴떄 객체 생성하게 수정.
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var activityMainBinding: ActivityMainBinding
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
         paintView = PaintView(activityMainBinding.root.context)
         activityMainBinding.root.addView(paintView)
         paintView.paint.color = setChangeDrawButtonColor(currentValue)
+        paintViewList.add(paintView)
 
 
 
@@ -99,13 +101,13 @@ class MainActivity : AppCompatActivity() {
             activityMainBinding.root.removeView(paintViewList[number])
         }
         paintViewList.clear()
-        recordPaintOrder = paintViewList.size
+        recordPaintOrder = 0
         createPaintView()
     }
 
     private fun prevCancel() {
         recordPaintOrder -= 1
-        if (recordPaintOrder <= -1) {
+        if (recordPaintOrder < 0) {
             recordPaintOrder = 0
             return
         }
@@ -121,8 +123,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun nextAction() {
 
-        if (recordPaintOrder > paintViewList.size-1 ) {
-            recordPaintOrder = paintViewList.size-1
+        if (recordPaintOrder > paintViewList.size - 1 - recordPaintOrder) {
+            recordPaintOrder = paintViewList.size - 1
             return
         }
 
