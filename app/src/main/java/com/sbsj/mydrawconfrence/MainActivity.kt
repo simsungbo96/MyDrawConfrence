@@ -21,26 +21,22 @@ class MainActivity : AppCompatActivity() {
     lateinit var paintView: PaintView
 
 
-    private var recordPaintOrder = 0
-    private var currentValue: Int = 0
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
 
         initPaintView()
-//        initChangeDrawButton()
-//
+
         activityMainBinding.ClearDrawingButton.setOnClickListener {
             clearDrawing()
         }
         activityMainBinding.PrevCancelButton.setOnClickListener {
-            paintView.prevCancel()
+            paintView.prevFunction()
         }
-//        activityMainBinding.NextActionButton.setOnClickListener {
-//            nextAction()
-//        }
+        activityMainBinding.NextActionButton.setOnClickListener {
+            paintView.nextFunction()
+        }
     }
 
     //페인트 뷰 초기화
@@ -48,10 +44,9 @@ class MainActivity : AppCompatActivity() {
         paintView = PaintView(activityMainBinding.root.context)
         paintView.changeDrawColor()
         activityMainBinding.root.addView(paintView)
-//        currentValue = paintView.colorValue
-//        paintViewList.add(paintView)
+
     }
-//
+
 
 //
 //    // 체인지 버튼 기능
@@ -110,7 +105,7 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     private fun clearDrawing() {
-        paintView.paintViewList.clear()
+        paintView.pathList.clear()
         activityMainBinding.root.removeView(paintView)
         initPaintView()
 
