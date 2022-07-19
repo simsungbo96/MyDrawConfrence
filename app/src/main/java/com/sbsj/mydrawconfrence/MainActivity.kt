@@ -37,12 +37,17 @@ class MainActivity : AppCompatActivity() {
         activityMainBinding.NextActionButton.setOnClickListener {
             paintView.nextFunction()
         }
+
+        activityMainBinding.DrawChangeButton.setOnClickListener {
+            paintView.plusChangeValue()
+            activityMainBinding.DrawChangeButton.setBackgroundColor(paintView.changeDrawColor())
+        }
     }
 
     //페인트 뷰 초기화
     private fun initPaintView() {
         paintView = PaintView(activityMainBinding.root.context)
-        paintView.changeDrawColor()
+        activityMainBinding.DrawChangeButton.setBackgroundColor(paintView.changeDrawColor())
         activityMainBinding.root.addView(paintView)
 
     }
@@ -72,17 +77,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 //    }
 //
-//    //체인지버튼 색 적용 >> colorValue 에 따라
-//    private fun setChangeDrawButtonColor(color: Int): Int {
-//        return when (color) {
-//            0 -> Color.BLACK
-//            1 -> Color.RED
-//            2 -> Color.GREEN
-//            3 -> Color.WHITE
-//            else -> Color.BLACK
-//        }
-//    }
-//
+
 
 //
 
