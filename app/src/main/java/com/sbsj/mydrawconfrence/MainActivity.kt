@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         activityMainBinding.DrawChangeButton.setOnClickListener {
-            paintView.plusChangeValue()
+            paintView.plusChangeStrokeValue()
             activityMainBinding.DrawChangeButton.setBackgroundColor(paintView.changeDrawColor())
         }
     }

@@ -23,8 +23,10 @@ open class PaintView(context: Context?) : View(context) {
     private var path = Path()
     private var x: Int = 0
     private var y: Int = 0
-    var colorValue = 0
+    private var colorValue = 0
+    private var strokeValue = 0
     var selectColor = 0
+    var selectStroke = 10.0f
 
 
     override fun onDraw(canvas: Canvas?) {
@@ -72,37 +74,48 @@ open class PaintView(context: Context?) : View(context) {
 
     }
 
-    fun plusChangeValue()  {
+    fun plusChangeColorValue() {
         colorValue++
     }
+    fun plusChangeStrokeValue(){
+        strokeValue++
+    }
+
+    fun changeDrawStroke() : Float{
+        if (strokeValue > 4) {
+            strokeValue = 0
+        }
+        when (colorValue) {
+            0 -> selectStroke = 10.0f
+            1 -> selectStroke = 7.0f
+            2 -> selectStroke = 5.0f
+            3 -> selectStroke = 3.0f
+            4 -> selectStroke = 1.0f
+        }
+        return selectStroke
+    }
+
     fun changeDrawColor(): Int {
-
-
-
-
         if (colorValue > 4) {
             colorValue = 0
         }
         when (colorValue) {
-
-            0 -> selectColor =Color.BLACK
+            0 -> selectColor = Color.BLACK
             1 -> selectColor = Color.RED
             2 -> selectColor = Color.GREEN
             3 -> selectColor = Color.BLUE
             4 -> selectColor = Color.YELLOW
         }
-
         return selectColor
-
     }
 
 
     private fun startDrawing() {
-        var tempColor  = Paint()
+        var tempColor = Paint()
 
-        tempColor.color =selectColor
+        tempColor.color = selectColor
         tempColor.style = Paint.Style.STROKE // todo  선 모양 지정 함수
-        tempColor.strokeWidth = 10.0f // todo 선 굵기 지정 함수
+        tempColor.strokeWidth = selectStroke // todo 선 굵기 지정 함수
         currentColor.add(tempColor)
         path.reset()
         path.moveTo(x.toFloat(), y.toFloat())
@@ -113,11 +126,8 @@ open class PaintView(context: Context?) : View(context) {
     private fun finishDrawing() {
 
 
-
         pathList.add(path)
-
         path = Path()
-
         invalidate()
 
 
@@ -131,7 +141,7 @@ open class PaintView(context: Context?) : View(context) {
                     .removeAt(pathList.size - 1)
             )
             undoColor.add(
-                currentColor .removeAt(currentColor.size - 1)
+                currentColor.removeAt(currentColor.size - 1)
             )
             invalidate();
         }
