@@ -31,7 +31,7 @@ open class PaintView(context: Context?) : View(context) {
 
     override fun onDraw(canvas: Canvas?) {
         paint.style = Paint.Style.STROKE // todo  선 모양 지정 함수
-        paint.strokeWidth = 10.0f // todo 선 굵기 지정 함수
+
 
 
         for (p in pathList.indices) {
@@ -77,20 +77,22 @@ open class PaintView(context: Context?) : View(context) {
     fun plusChangeColorValue() {
         colorValue++
     }
-    fun plusChangeStrokeValue(){
+
+    fun plusChangeStrokeValue() {
         strokeValue++
+
     }
 
-    fun changeDrawStroke() : Float{
+    fun changeDrawStroke(): Float {
         if (strokeValue > 4) {
             strokeValue = 0
         }
-        when (colorValue) {
+        when (strokeValue) {
             0 -> selectStroke = 10.0f
-            1 -> selectStroke = 7.0f
-            2 -> selectStroke = 5.0f
-            3 -> selectStroke = 3.0f
-            4 -> selectStroke = 1.0f
+            1 -> selectStroke = 20.0f
+            2 -> selectStroke = 30.0f
+            3 -> selectStroke = 40.0f
+            4 -> selectStroke = 5.0f
         }
         return selectStroke
     }
@@ -111,12 +113,16 @@ open class PaintView(context: Context?) : View(context) {
 
 
     private fun startDrawing() {
-        var tempColor = Paint()
 
+        paint.color = selectColor
+        paint.style = Paint.Style.STROKE // todo  선 모양 지정 함수
+        paint.strokeWidth = selectStroke // todo 선 굵기 지정 함수
+        val tempColor = Paint()
         tempColor.color = selectColor
         tempColor.style = Paint.Style.STROKE // todo  선 모양 지정 함수
         tempColor.strokeWidth = selectStroke // todo 선 굵기 지정 함수
         currentColor.add(tempColor)
+
         path.reset()
         path.moveTo(x.toFloat(), y.toFloat())
 
@@ -124,7 +130,6 @@ open class PaintView(context: Context?) : View(context) {
     }
 
     private fun finishDrawing() {
-
 
         pathList.add(path)
         path = Path()

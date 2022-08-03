@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginTop="10dp"
         android:id="@+id/DrawChangeButton"
-        android:background="@color/black"
+        android:background="@drawable/ic_baseline_border_color_24"
         app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,15 +19,54 @@
         android:layout_height="50dp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/ClearDrawingButton"
-        android:text="지워"
+        android:id="@+id/DrawStrokeChangeButton"
         android:layout_marginTop="10dp"
+        android:text="굵기"
+
         app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintTop_toBottomOf="@id/DrawChangeButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/ClearDrawingButton"
+        android:text="초기화"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintTop_toBottomOf="@id/DrawStrokeChangeButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/RecordButton"
+        android:backgroundTint="@color/black"
+        android:background="@drawable/ic_baseline_videocam_24"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintTop_toBottomOf="@id/ClearDrawingButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="50dp"
         android:layout_height="50dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/StopButton"
+        android:backgroundTint="@color/black"
+        android:visibility="invisible"
+        android:background="@drawable/ic_baseline_stop_24"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintTop_toBottomOf="@id/ClearDrawingButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/PrevCancelButton"
         android:background="@drawable/ic_baseline_arrow_back_24"
